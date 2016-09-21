@@ -2,7 +2,7 @@ package base;
 
 import java.util.Date;
 
-public class Note {
+public class Note implements Comparable<Note>{
 	private Date date;
 	private String title;
 	
@@ -13,6 +13,10 @@ public class Note {
 	
 	public String getTitle(){
 		return title;
+	}
+	
+	public String getContent(){
+		return null;
 	}
 
 	@Override
@@ -32,6 +36,28 @@ public class Note {
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
+	}
+	
+	public int compareTo(Note o){
+		// TODO Auto-generated method stub
+		// compare base in creation date
+		// more recently is considered as smaller
+		// 0=smaller, 1=larger
+		int i = 0;
+		Date date1 = this.date;
+		Date date2 = o.date;
+		if (date1.after(date2)){
+			i = -1;
+		}else if(date1.before(date2)){
+			i = 1;
+		}else{
+			i = 0;
+		}
+		return i;
+	}
+	
+	public String toString(){
+		return date.toString() + "\t" + title;
 	}
 	
 }
