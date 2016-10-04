@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Collections;
 import java.util.List;
+import java.io.Serializable;
 
-public class Folder implements Comparable<Folder>{
+public class Folder implements Comparable<Folder>,Serializable{
 
 	private ArrayList<Note> notes;
 	private String name;
@@ -85,7 +86,7 @@ public class Folder implements Comparable<Folder>{
 		List<Note> result = new ArrayList<Note>();
 		List<Integer> or = new ArrayList<Integer>();
 		String[] splited = keywords.split(" ");
-		int compare1;
+		/*int compare1;
 		int compare2;
 		int compare3;
 		int compare4;
@@ -99,7 +100,7 @@ public class Folder implements Comparable<Folder>{
 			if((compare1 == 0)||(compare2 == 0)||(compare3 == 0)||(compare4 == 0)){
 				or.add(i);
 			}
-		}
+		}*/
 		//scan through each notes
 		for(Note note : notes){
 			if (note instanceof TextNote){
