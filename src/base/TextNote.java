@@ -75,11 +75,12 @@ public class TextNote extends Note{
 			String title = this.getTitle();
 			String content = this.getContent();
 			title = title.replaceAll(" ", "_");
-			File file = new File( pathFolder + File.separator + title + ".txt" );
-			File test = new File("C:/Users/Zoe/git/comp3021lab/" + title + pathFolder + ".txt");
+			//File file = new File( pathFolder + File.separator + title + ".txt" );
+			File file = new File( pathFolder + title + ".txt" );
+			//File test = new File("C:/Users/Zoe/git/comp3021lab/" + title + ".txt");
 			//oos.writeObject(file);
 			//oos.close();
-			FileWriter fw = new FileWriter(test);
+			FileWriter fw = new FileWriter(file);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(content);
 			bw.close();
