@@ -84,83 +84,167 @@ public class Folder implements Comparable<Folder>,Serializable{
 	}
 	
 	public List<Note> searchNotes(String keywords){
-		List<Note> result = new ArrayList<Note>();
-		List<Integer> or = new ArrayList<Integer>();
-		String[] splited = keywords.split(" ");
-		/*int compare1;
-		int compare2;
-		int compare3;
-		int compare4;
-		//find out all the or
-		for (int i = 0; i <= splited.length-1; i++){
-			//splited[i]
-			compare1 = splited[i].compareTo("or");
-			compare2 = splited[i].compareTo("oR");
-			compare3 = splited[i].compareTo("Or");
-			compare4 = splited[i].compareTo("OR");
-			if((compare1 == 0)||(compare2 == 0)||(compare3 == 0)||(compare4 == 0)){
-				or.add(i);
-			}
-		}*/
-		//scan through each notes
-		for(Note note : notes){
-			if (note instanceof TextNote){
-				String title = note.getTitle();
-				String content = note.getContent();
-				Boolean tf = true;
-				int i = 0;
-				while (i <= splited.length-1){
-					//if next word == or 
-					if(splited[i+1].toLowerCase().compareTo("or")==0){
-						//if contain already, jump 3
-						if(title.toLowerCase().contains(splited[i].toLowerCase()) || title.toLowerCase().contains(splited[i+2].toLowerCase()) || content.toLowerCase().contains(splited[i].toLowerCase()) || content.toLowerCase().contains(splited[i+2].toLowerCase())){
-							i+=3;
-						}else{
-							tf = false;
-							break;
-						}
-					}else{
-						if(title.toLowerCase().contains(splited[i].toLowerCase()) || content.toLowerCase().contains(splited[i].toLowerCase())){
-							i+=1;
-						}else{
-							tf = false;
-							break;
-						}
-					}
-				}
-				if(tf==true){
-					result.add(note);
+		String[] karray = keywords.split(" ");
+		List<Note> snote = new ArrayList<Note>();
+		for (Note note : this.notes){
+			boolean Flag=true;
+			int i=0;
+			while((i<karray.length)&&(Flag)){
+				Flag=false;
+				if(note instanceof TextNote)
+				{
+					do{
+						if (karray[i].equalsIgnoreCase("or"))
+						i++;
+						if ((note.getTitle().toLowerCase().indexOf(karray[i].toLowerCase())>=0)||(((TextNote) note).content.toLowerCase().indexOf(karray[i].toLowerCase())>=0))
+						{Flag=true;}
+						i++;
+					} while ((i<karray.length)&&(karray[i].equalsIgnoreCase("or")));
+				}else {
+					do {
+						if (karray[i].equalsIgnoreCase("or"))
+						i++;
+						if ((note.getTitle().toLowerCase().indexOf(karray[i].toLowerCase())>=0))
+						{Flag=true;}
+						i++;
+					} while ((i<karray.length)&&(karray[i].equalsIgnoreCase("or")));
 				}
 			}
-			else{
-				String title = note.getTitle();
-				Boolean tf = true;
-				int i = 0;
-				while (i <= splited.length-1){
-					//if next word == or 
-					if(splited[i+1].toLowerCase().compareTo("or")==0){
-						//if contain already, jump 3
-						if(title.toLowerCase().contains(splited[i].toLowerCase()) || title.toLowerCase().contains(splited[i+2].toLowerCase())){
-							i+=3;
-						}else{
-							tf = false;
-							break;
-						}
-					}else{
-						if(title.toLowerCase().contains(splited[i].toLowerCase())){
-							i+=1;
-						}else{
-							tf = false;
-							break;
-						}
-					}
-				}
-				if(tf==true){
-					result.add(note);
-				}
-			}
+			if (Flag)
+				snote.add(note);
 		}
-		return result;
+		return snote;
+
 	}
+	
+//	public List<Note> searchNotes(String keywords){
+//		List<Note> result = new ArrayList<Note>();
+//		String[] splited = keywords.split(" ");
+//		List<String> orArray = new ArrayList<String>();
+//		List<String> andArray = new ArrayList<String>();
+//		int i = 0;
+//		//int j = 1;
+//		while(i<=splited.length-1){
+//			if(splited[i+1].toLowerCase().compareTo("or")==0){
+//				String arr = "";
+//				while(splited[i+3].toLowerCase().compareTo("or")==0){
+//					arr = arr + splited[i];
+//					i += 2;
+//				}
+//				arr = arr + splited[i] + splited[i+2];
+//				i += 2;
+//				orArray.add(arr);
+//			}else{
+//				
+//			}
+//		}
+//		
+//		//scan through each notes
+//		for(Note note : notes){
+//			if (note instanceof TextNote){
+//				String title = note.getTitle();
+//				String content = note.getContent();
+//				Boolean tf = true;
+//			}
+//			else{
+//				String title = note.getTitle();
+//				String content = note.getContent();
+//				Boolean tf = true;
+//			}
+//		}
+//		return result;
+//	}
+	
+//	public List<Note> searchNotes(String keywords){
+//		List<Note> result = new ArrayList<Note>();
+//		List<Integer> or = new ArrayList<Integer>();
+//		List<Integer> and = new ArrayList<Integer>();
+//		String[] splited = keywords.split(" ");
+//		List<String> orArray = new ArrayList<String>();
+//		List<String> andArray = new ArrayList<String>();
+//		int i = 0;
+//		//int j = 1;
+//		while(i<=splited.length-1){
+//			String arr = "";
+//			/*while (splited[i+1].toLowerCase().compareTo("or")==0){
+//				arr = arr + splited[i] + " ";
+//				i += 2;
+//			}
+//			arr = arr + splited [i];
+//			orArray.add(arr);*/
+//			if (splited[i+1].toLowerCase().compareTo("or")==0){
+//				arr = " " + splited[i];
+//				while (splited[i+3].toLowerCase().compareTo("or")==0){
+//					arr = arr + splited[i] + " ";
+//					i += 2;
+//				}
+//			}else{
+//				//andArray.add(splited[i]);
+//				while (splited[i+3].toLowerCase().compareTo("and")==0){
+//					
+//				}
+//			}
+//			System.out.println(arr);
+//		}
+//		
+//		//scan through each notes
+//		for(Note note : notes){
+//			if (note instanceof TextNote){
+//				String title = note.getTitle();
+//				String content = note.getContent();
+//				Boolean tf = true;
+//				/*while (i <= splited.length-1){
+//					//if next word == or 
+//					if(splited[i+1].toLowerCase().compareTo("or")==0){
+//						//if contain already, jump 3
+//						if(title.toLowerCase().contains(splited[i].toLowerCase()) || title.toLowerCase().contains(splited[i+2].toLowerCase()) || content.toLowerCase().contains(splited[i].toLowerCase()) || content.toLowerCase().contains(splited[i+2].toLowerCase())){
+//							i+=3;
+//						}else{
+//							tf = false;
+//							break;
+//						}
+//					}else{
+//						if(title.toLowerCase().contains(splited[i].toLowerCase()) || content.toLowerCase().contains(splited[i].toLowerCase())){
+//							i+=1;
+//						}else{
+//							tf = false;
+//							break;
+//						}
+//					}
+//				}*/
+//				if(tf==true){
+//					result.add(note);
+//				}
+//			}
+//			else{
+//				String title = note.getTitle();
+//				Boolean tf = true;
+//				int i = 0;
+//				while (i <= splited.length-1){
+//					//if next word == or 
+//					if(splited[i+1].toLowerCase().compareTo("or")==0){
+//						//if contain already, jump 3
+//						if(title.toLowerCase().contains(splited[i].toLowerCase()) || title.toLowerCase().contains(splited[i+2].toLowerCase())){
+//							i+=3;
+//						}else{
+//							tf = false;
+//							break;
+//						}
+//					}else{
+//						if(title.toLowerCase().contains(splited[i].toLowerCase())){
+//							i+=1;
+//						}else{
+//							tf = false;
+//							break;
+//						}
+//					}
+//				}
+//				if(tf==true){
+//					result.add(note);
+//				}
+//			}
+//		}
+//		return result;
+//	}
 	
 }
