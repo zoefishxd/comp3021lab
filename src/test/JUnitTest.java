@@ -41,7 +41,7 @@ public class JUnitTest {
 	@Test
 	public void testcountLetters(){
 		NoteBook nb = new NoteBook();
-		nb.createTextNote("Note1", "aa", "bb");
+		nb.createTextNote("Note1", "a", "1");
 		ArrayList<Folder> folder = nb.getFolders();
 		Character c = '\0';
 //		for (Note note : folder.getNote()){
@@ -58,7 +58,8 @@ public class JUnitTest {
 		//HashSet<String> expectedOutputs = new HashSet<String>();
 		//expectedOutputs.add("a");
 		//expectedOutputs.add("b");
-		assertEquals("The search results is not match", new Character('b'), c);
+		//assertEquals("The search results is not match", new Character('b'), c);
+		assertEquals("The search results is not match", new Character('a'), c);
 	}
 	
 

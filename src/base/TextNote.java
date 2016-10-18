@@ -10,8 +10,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.io.BufferedWriter; 
 import java.io.FileWriter;
+import java.util.ArrayList;
 
 public class TextNote extends Note{
 	public String content;
@@ -91,11 +93,34 @@ public class TextNote extends Note{
 		}
 	}
 	
+//	public Character countLetters(){
+//		HashMap<Character,Integer> count = new HashMap<Character,Integer>();
+//		String a = this.getTitle() + this.getContent();
+//		int b = 0;
+//		Character r = ' ';
+//		for (int i = 0; i < a.length(); i++) {
+//			Character c = a.charAt(i);
+//			if (c <= 'Z' && c >= 'A' || c <= 'z' && c >= 'a') {
+//				if (!count.containsKey(c)) {
+//					count.put(c, 1);
+//				} else {
+//					count.put(c, count.get(c) + 1);
+//					if (count.get(c) > b) {
+//						b = count.get(c);
+//						r = c;
+//					}
+//				}
+//			}
+//		}
+//		return r;
+//	}
+	
 	public Character countLetters(){
 		HashMap<Character,Integer> count = new HashMap<Character,Integer>();
 		String a = this.getTitle() + this.getContent();
 		int b = 0;
 		Character r = ' ';
+		List<Character> result = new ArrayList<Character>();
 		for (int i = 0; i < a.length(); i++) {
 			Character c = a.charAt(i);
 			if (c <= 'Z' && c >= 'A' || c <= 'z' && c >= 'a') {
@@ -103,13 +128,23 @@ public class TextNote extends Note{
 					count.put(c, 1);
 				} else {
 					count.put(c, count.get(c) + 1);
-					if (count.get(c) > b) {
-						b = count.get(c);
-						r = c;
-					}
+//					if (count.get(c) >= b) {
+//						b = count.get(c);
+//						r = c;
+//					}
+				}
+				if (count.get(c) >= b) {
+					b = count.get(c);
+					r = c;
 				}
 			}
 		}
+//		for (int i=0; i<a.length();i++){
+//			Character c = a.charAt(i);
+//			if(count.get(c)==b){
+//				result.add(c);
+//			}
+//		}
 		return r;
 	}
 
