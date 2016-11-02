@@ -32,6 +32,11 @@ public class TextNote extends Note{
 		return content;
 	}
 	
+	@Override
+	public void editContent(String newContent){
+		this.content = newContent;
+	}
+	
 	
 	
 	/** * load a TextNote from File f

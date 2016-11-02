@@ -20,6 +20,10 @@ public class Note implements Comparable<Note>,Serializable{
 	public String getContent(){
 		return null;
 	}
+	
+	public void editContent(String newContent){
+		
+	}
 
 	@Override
 	public int hashCode() {

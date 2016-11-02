@@ -247,4 +247,20 @@ public class Folder implements Comparable<Folder>,Serializable{
 //		return result;
 //	}
 	
+	public boolean removeNotes(String title){
+//		int n1=notes.indexOf(new TextNote(title));
+//		if (n1>=0){
+//			notes.remove(n1);
+//			return true;
+//		}
+//		return false;
+		for(Note n : notes){
+			if(n.getTitle().equals(title)){
+				notes.remove(n);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
